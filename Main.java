@@ -48,11 +48,11 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     private static void initialGreeting() {
-        System.out.println("Welcome to JPBank. Your cash safety is our priority.");
+        System.out.println("\nWelcome to JPBank. Your cash safety is our priority.");
     }
 
     private static void endGreeting() {
-        System.out.println("Thankyou for Visiting!!");
+        System.out.println("\nThankyou for Visiting!!");
     }
 
     private static int setAccountNumber() {
@@ -66,7 +66,7 @@ public class Main {
     }
 
     private static void askForInitialMenu(JPBank user) throws Exception {
-        System.out.print("Press 1 to go back to initial menu(otherwise press any other number) : ");
+        System.out.print("\nPress 1 to go back to initial menu(otherwise press any other number) : ");
         int input = sc.nextInt();
         if(input == 1) 
             initialMenu(user);
@@ -89,8 +89,12 @@ public class Main {
         return sc.nextInt();
     }
 
+    private static void showUpdatedBalance(int updatedBalance) {
+        System.out.println("Updated Balance : $" + updatedBalance);
+    }
+
     private static void initialMenu(JPBank user) throws Exception {
-        System.out.println("Please enter an input : ");
+        System.out.println("\nPlease enter an input : ");
         System.out.println("Press 1 to check your balance");
         System.out.println("Press 2 for amount deposit");
         System.out.println("Press 3 for cash withdrawl");
@@ -112,7 +116,7 @@ public class Main {
     private static void checkBalance(JPBank user) throws Exception {
         int pin = askForPin();
         int currBalance = user.checkBalance(pin);
-        System.out.println("Your current balance is " + currBalance);
+        System.out.println("Your current balance is $" + currBalance);
         askForInitialMenu(user);
     }
 
@@ -121,7 +125,7 @@ public class Main {
         int pin = askForPin();
         int updatedBalance = user.deposit(pin, amount);
         System.out.println("$" + amount + " successfully deposited to your account.");
-        System.out.println("Updated Balance : $" + updatedBalance);
+        showUpdatedBalance(updatedBalance);
         askForInitialMenu(user);
     }
 
@@ -130,7 +134,7 @@ public class Main {
         int pin = askForPin();
         int updatedBalance = user.withdraw(pin, amount);
         System.out.println("Here is your money : $" + amount);
-        System.out.println("Updated Balance : $" + updatedBalance);
+        showUpdatedBalance(updatedBalance);
         askForInitialMenu(user);
     }
 
@@ -142,8 +146,8 @@ public class Main {
         int initialDeposit = askForInitialDeposit();
 
         JPBank user = new JPBank(accountNumber, pin, initialDeposit);
-        System.out.println("Congratulations, your account is successfully Created.");
-        
+        System.out.println("\nCongratulations, your account is successfully Created.");
+        showUpdatedBalance(initialDeposit);
 
         initialMenu(user);
         sc.close();
